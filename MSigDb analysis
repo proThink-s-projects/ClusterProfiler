@@ -1,0 +1,13 @@
+library(msigdbr)
+msigdbr_show_species()
+m_df <- msigdbr(species = "Homo sapiens")
+head(m_df,2)%>% as.data.frame
+m_t2g <- msigdbr(species = "Homo sapiens",category = "C6") %>% dplyr::select(gs_name,entrez_gene)
+head(m_t2g)
+em <- enricher(gene,TERM2GENE = m_t2g)
+em2 <- GSEA(geneList,TERM2GENE = m_t2g)
+head(em)
+m_t2g <- msigdbr(species = "Homo sapiens",category = "C3")%>% dplyr::select(gs_name,entrez_gene)
+head(m_t2g)
+em3 <- GSEA(geneList,TERM2GENE = m_t2g)
+head(em3)
