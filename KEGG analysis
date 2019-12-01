@@ -1,0 +1,8 @@
+library(clusterProfiler)
+search_kegg_organism('ece',by='kegg_code')
+ecoli <- search_kegg_organism('Escherichia coli',by='scientific_name')
+data(geneList,package = "DOSE")
+gene <- names(geneList)[abs(geneList)>2]
+kk <- enrichKEGG(gene = gene,organism = 'hsa',pvalueCutoff = 0.05)
+kk2 <- gseKEGG(geneList = geneList,organism = 'hsa',nPerm = 1000,minGSSize = 120,verbose = FALSE)
+mkk <- enrichMKEGG(gene = gene,organism = 'hsa')
