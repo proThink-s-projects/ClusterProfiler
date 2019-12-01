@@ -1,0 +1,19 @@
+library(DOSE)
+data("geneList")
+gene <- names(geneList)[abs(geneList)>1.5]
+head(gene)
+X <- enrichDO(gene = gene,ont = "DO",pvalueCutoff = 0.05,pAdjustMethod = "BH",universe = names(geneList),minGSSize = 5,maxGSSize = 500,qvalueCutoff = 0.05,readable = FALSE)
+head(X)
+X <- setReadable(X,'org.Hs.eg.db')
+gene2 <- names(geneList)[abs(geneList)<3]
+ncg <- enrichNCG(gene2)
+head(ncg)
+dgn <- enrichDGN(gene)
+head(dgn)
+snp <- c("rs1401296")
+dgnv <- enrichDGNv(snp)
+y <- gseDO(geneList,nPerm = 100,minGSSize = 120,pvalueCutoff = 0.2,pAdjustMethod = "BH",verbose = FALSE)
+head(y,3)
+ncg <- gseNCG(geneList,nPerm = 100,minGSSize = 120,pvalueCutoff = 0.2,pAdjustMethod = "BH",verbose=FALSE)
+head(ncg,3)
+#这里的分析就是直接调用一些函数就可以了
