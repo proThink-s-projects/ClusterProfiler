@@ -1,0 +1,7 @@
+library(meshes)
+data(geneList,package = "DOSE")
+de <- names(geneList)[1:100]
+x <-enrichMeSH(de,MeSHDb = "MeSH.Hsa.eg.db",database = 'gendoo',category ='C')
+#此处需要安装BiocManager::install("MeSH.Hsa.eg.db")
+dotplot(x)
+gseaplot(y,y[1,1],title = y[1,2])
